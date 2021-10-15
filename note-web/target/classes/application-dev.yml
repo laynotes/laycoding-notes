@@ -1,10 +1,13 @@
 spring:
+  devtools:
+    restart:
+      enabled: true
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:mysql://127.0.0.1/laycoding_notes?serverTimezone=UTC&useSSL=false
     username: root
     password: 123456
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     # Hikari 连接池配置
     hikari:
       # 最小空闲链接
@@ -24,7 +27,7 @@ mybatis-plus:
    map-underscore-to-camel-case: true
    auto-mapping-behavior: full
    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-  mapper-locations: classpath*:com/laycoding/mapper/**/*Mapper.xml
+  mapper-locations: classpath*:mapper/*.xml
 #日志
 logging:
   level:

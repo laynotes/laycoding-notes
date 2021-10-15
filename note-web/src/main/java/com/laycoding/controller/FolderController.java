@@ -1,30 +1,40 @@
 package com.laycoding.controller;
 
+
 import com.laycoding.common.util.Result;
 import com.laycoding.entity.Folder;
-import com.laycoding.service.FolderService;
-
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import com.laycoding.service.IFolderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Api(tags = "文件夹模块")
+/**
+ * <p>
+ *  前端控制器
+ * </p>
+ *
+ * @author laycoding
+ * @since 2021-10-15
+ */
 @RestController
 @RequestMapping("/folder")
 public class FolderController {
 
     @Autowired
-    private FolderService sysFolderService;
+    private IFolderService folderService;
 
-    @ApiOperation(value = "获取所有文件")
-    @RequestMapping(value = "/getAll", method = RequestMethod.GET)
-    public Result<List<Folder>> getAll() {
-
-        return Result.success(sysFolderService.getAllFolder());
+    @RequestMapping("/listFolder")
+    @PreAuthorize("hasAnyAuthority('SystemUserInsert')")
+    public Result<List<Folder>> listFolder(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Object principal = authentication.getPrincipal();
+        return folderService.listFolder();
     }
 }
