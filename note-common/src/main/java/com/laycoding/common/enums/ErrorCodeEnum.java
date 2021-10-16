@@ -1,7 +1,14 @@
 package com.laycoding.common.enums;
 
+/**
+ * 错误码枚举类
+ * @author laycoding
+ * @since 2021-10-15
+ */
 public enum ErrorCodeEnum {
-
+    /**
+     *
+     */
     SUCCESS(200, "nice"),
 
     NO_PERMISSION(403, "你没得权限"),

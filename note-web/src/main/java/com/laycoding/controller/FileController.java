@@ -1,13 +1,15 @@
 package com.laycoding.controller;
 
 
-import com.laycoding.common.util.Result;
+import com.laycoding.common.util.ResultUtil;
+import com.laycoding.dto.FileDTO;
+import com.laycoding.dto.FileInfoDTO;
 import com.laycoding.entity.File;
 import com.laycoding.service.IFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -28,8 +30,13 @@ public class FileController {
     private IFileService fileService;
 
     @RequestMapping("/listFiles")
-    public Result<List<File>> getAll(){
+    public ResultUtil<List<FileDTO>> listFiles(Integer type,String folderId){
 
-        return fileService.listFiles();
+        return fileService.listFiles(1,folderId);
+    }
+
+    @RequestMapping(value = "/getFileInfoById",method = RequestMethod.GET)
+    public ResultUtil<FileInfoDTO> getFileInfoById(String fileId){
+        return fileService.getFileInfoById(fileId);
     }
 }

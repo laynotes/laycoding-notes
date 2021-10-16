@@ -33,6 +33,9 @@ public class OauthConfig extends AuthorizationServerConfigurerAdapter {
     private PasswordEncoder passwordEncoder;
 
 
+    @Autowired
+    private CustomAccessTokenConverter customAccessTokenConverter;
+
     @Resource
     private AuthenticationManager authenticationManager;
 
@@ -77,21 +80,11 @@ public class OauthConfig extends AuthorizationServerConfigurerAdapter {
     public JwtAccessTokenConverter accessTokenConverter() {
         JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
         //简单对称加密，可使用
+        jwtAccessTokenConverter.setAccessTokenConverter(customAccessTokenConverter);
         jwtAccessTokenConverter.setSigningKey("123456");
 
         return jwtAccessTokenConverter;
     }
-
-/**
- * 密钥对jwt.jks为resource下的秘钥对文件（具体生成百度）
- * 此处仅为简单对称加密，无相关文件
- */
-//    @Bean
-//    public KeyPair keyPair() {
-//        //从classpath下的证书中获取秘钥对
-//        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("jwt.jks"), "123456".toCharArray());
-//        return keyStoreKeyFactory.getKeyPair("jwt", "123456".toCharArray());
-//    }
 
 }
 

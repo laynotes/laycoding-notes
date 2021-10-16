@@ -22,7 +22,7 @@ import java.util.List;
 public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permission> implements IPermissionService {
 
     @Override
-    public List<Permission> queryByUserId(Long userId) {
+    public List<Permission> queryByUserId(Integer userId) {
         return this.baseMapper.queryByUserId(userId);
     }
 }

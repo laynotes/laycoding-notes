@@ -9,14 +9,14 @@ import java.util.Collection;
 
 public class UserDetailDTO extends User {
 
-    private Long userId;
+    private Integer userId;
 
 
     public UserDetailDTO(String username, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
 
     }
-    public UserDetailDTO(Long userId,String username, String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserDetailDTO(Integer userId,String username, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
         this.userId=userId;
     }
@@ -24,11 +24,11 @@ public class UserDetailDTO extends User {
         super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
     }
 
-    public Long getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 }

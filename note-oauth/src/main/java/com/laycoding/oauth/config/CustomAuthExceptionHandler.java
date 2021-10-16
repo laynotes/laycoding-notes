@@ -3,7 +3,7 @@ package com.laycoding.oauth.config;
 import com.alibaba.fastjson.JSON;
 import com.laycoding.common.enums.ErrorCodeEnum;
 import com.laycoding.common.exceptions.BaseException;
-import com.laycoding.common.util.Result;
+import com.laycoding.common.util.ResultUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
@@ -35,11 +35,11 @@ public class CustomAuthExceptionHandler implements AuthenticationEntryPoint, Acc
         if (cause instanceof InvalidTokenException) {
             log.error("InvalidTokenException : {}",cause.getMessage());
             //Token无效
-            response.getWriter().write(JSON.toJSONString(Result.defineError(new BaseException(ErrorCodeEnum.NO_AUTH.getErrorCode(),ErrorCodeEnum.NO_AUTH.getErrorMsg() ))));
+            response.getWriter().write(JSON.toJSONString(ResultUtil.defineError(new BaseException(ErrorCodeEnum.NO_AUTH.getErrorCode(),ErrorCodeEnum.NO_AUTH.getErrorMsg() ))));
         } else {
             log.error("AuthenticationException : NoAuthentication");
             //资源未授权
-            response.getWriter().write(JSON.toJSONString(Result.defineError(new BaseException(ErrorCodeEnum.NO_AUTH.getErrorCode(),ErrorCodeEnum.NO_AUTH.getErrorMsg() ))));
+            response.getWriter().write(JSON.toJSONString(ResultUtil.defineError(new BaseException(ErrorCodeEnum.NO_AUTH.getErrorCode(),ErrorCodeEnum.NO_AUTH.getErrorMsg() ))));
         }
 
     }
@@ -55,6 +55,6 @@ public class CustomAuthExceptionHandler implements AuthenticationEntryPoint, Acc
         response.addHeader("Access-Control-Max-Age", "1800");
         //访问资源的用户权限不足
         log.error("AccessDeniedException : {}",accessDeniedException.getMessage());
-        response.getWriter().write(JSON.toJSONString(Result.defineError(new BaseException(ErrorCodeEnum.NO_AUTH.getErrorCode(),ErrorCodeEnum.NO_AUTH.getErrorMsg() ))));
+        response.getWriter().write(JSON.toJSONString(ResultUtil.defineError(new BaseException(ErrorCodeEnum.NO_AUTH.getErrorCode(),ErrorCodeEnum.NO_AUTH.getErrorMsg() ))));
     }
 }

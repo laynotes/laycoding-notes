@@ -2,7 +2,7 @@ package com.laycoding.config;
 
 import com.laycoding.common.enums.ErrorCodeEnum;
 import com.laycoding.common.exceptions.BaseException;
-import com.laycoding.common.util.Result;
+import com.laycoding.common.util.ResultUtil;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,8 +16,8 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = BaseException.class)
     @ResponseBody
-    public Result bizExceptionHandler(BaseException e) {
-        return Result.defineError(e);
+    public ResultUtil bizExceptionHandler(BaseException e) {
+        return ResultUtil.defineError(e);
     }
 
     /**
@@ -26,7 +26,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
-    public Result exceptionHandler( Exception e) {
-        return Result.otherError(ErrorCodeEnum.INTERNAL_SERVER_ERROR);
+    public ResultUtil exceptionHandler(Exception e) {
+        return ResultUtil.otherError(ErrorCodeEnum.INTERNAL_SERVER_ERROR);
     }
 }

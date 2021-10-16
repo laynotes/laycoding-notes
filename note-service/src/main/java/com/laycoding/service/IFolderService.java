@@ -1,6 +1,7 @@
 package com.laycoding.service;
 
-import com.laycoding.common.util.Result;
+import com.laycoding.common.util.ResultUtil;
+import com.laycoding.dto.FolderDTO;
 import com.laycoding.entity.Folder;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -16,5 +17,5 @@ import java.util.List;
  */
 public interface IFolderService extends IService<Folder> {
 
-    Result<List<Folder>> listFolder();
+    ResultUtil<List<FolderDTO>> listFolders();
 }

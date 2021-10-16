@@ -1,23 +1,20 @@
 package com.laycoding.controller;
 
 
-import com.laycoding.common.util.Result;
-import com.laycoding.entity.Folder;
+import com.laycoding.common.util.ResultUtil;
+import com.laycoding.dto.FolderDTO;
 import com.laycoding.service.IFolderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author laycoding
@@ -30,11 +27,8 @@ public class FolderController {
     @Autowired
     private IFolderService folderService;
 
-    @RequestMapping("/listFolder")
-    @PreAuthorize("hasAnyAuthority('SystemUserInsert')")
-    public Result<List<Folder>> listFolder(){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Object principal = authentication.getPrincipal();
-        return folderService.listFolder();
+    @RequestMapping(value = "/listFolders", method = RequestMethod.GET)
+    public ResultUtil<List<FolderDTO>> listFolder() {
+        return folderService.listFolders();
     }
 }

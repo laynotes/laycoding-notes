@@ -38,7 +38,7 @@ public class Folder implements Serializable {
     private String folderName;
 
     @ApiModelProperty("是否可以编辑")
-    private Boolean isEditor;
+    private Integer isEditor;
 
     @ApiModelProperty("创建时间")
     private LocalDateTime createTime;
@@ -81,11 +81,11 @@ public class Folder implements Serializable {
     public void setFolderName(String folderName) {
         this.folderName = folderName;
     }
-    public Boolean getIsEditor() {
+    public Integer getIsEditor() {
         return isEditor;
     }
 
-    public void setIsEditor(Boolean isEditor) {
+    public void setIsEditor(Integer isEditor) {
         this.isEditor = isEditor;
     }
     public LocalDateTime getCreateTime() {

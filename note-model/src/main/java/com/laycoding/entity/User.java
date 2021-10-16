@@ -23,7 +23,7 @@ public class User implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     @ApiModelProperty("用户名")
     private String username;
@@ -49,11 +49,11 @@ public class User implements Serializable {
     @ApiModelProperty("更新时间")
     private LocalDateTime modifyTime;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     public String getUsername() {

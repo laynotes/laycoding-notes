@@ -23,10 +23,10 @@ public class Permission implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     @ApiModelProperty("父权限")
-    private Long parentId;
+    private Integer parentId;
 
     @ApiModelProperty("权限名称")
     private String name;
@@ -46,18 +46,18 @@ public class Permission implements Serializable {
     @ApiModelProperty("更新时间")
     private LocalDateTime modifyTime;
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
-    public Long getParentId() {
+    public Integer getParentId() {
         return parentId;
     }
 
-    public void setParentId(Long parentId) {
+    public void setParentId(Integer parentId) {
         this.parentId = parentId;
     }
     public String getName() {
