@@ -14,7 +14,7 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author laycoding
- * @since 2021-10-15
+ * @since 2021-10-16
  */
 @TableName("sys_user")
 @ApiModel(value = "User对象", description = "用户表")
@@ -28,6 +28,7 @@ public class User implements Serializable {
     @ApiModelProperty("用户名")
     private String username;
 
+    @ApiModelProperty("昵称")
     private String name;
 
     @ApiModelProperty("密码，加密存储")
@@ -39,9 +40,14 @@ public class User implements Serializable {
     @ApiModelProperty("注册邮箱")
     private String email;
 
-    private LocalDateTime created;
+    @ApiModelProperty("禁止登入")
+    private Boolean isDelete;
 
-    private LocalDateTime updated;
+    @ApiModelProperty("创建时间 ")
+    private LocalDateTime createTime;
+
+    @ApiModelProperty("更新时间")
+    private LocalDateTime modifyTime;
 
     public Long getId() {
         return id;
@@ -85,19 +91,26 @@ public class User implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
-    public LocalDateTime getCreated() {
-        return created;
+    public Boolean getIsDelete() {
+        return isDelete;
     }
 
-    public void setCreated(LocalDateTime created) {
-        this.created = created;
+    public void setIsDelete(Boolean isDelete) {
+        this.isDelete = isDelete;
     }
-    public LocalDateTime getUpdated() {
-        return updated;
+    public LocalDateTime getCreateTime() {
+        return createTime;
     }
 
-    public void setUpdated(LocalDateTime updated) {
-        this.updated = updated;
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
+    }
+    public LocalDateTime getModifyTime() {
+        return modifyTime;
+    }
+
+    public void setModifyTime(LocalDateTime modifyTime) {
+        this.modifyTime = modifyTime;
     }
 
     @Override
@@ -109,8 +122,9 @@ public class User implements Serializable {
             ", password=" + password +
             ", phone=" + phone +
             ", email=" + email +
-            ", created=" + created +
-            ", updated=" + updated +
+            ", isDelete=" + isDelete +
+            ", createTime=" + createTime +
+            ", modifyTime=" + modifyTime +
         "}";
     }
 }

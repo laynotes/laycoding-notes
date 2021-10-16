@@ -1,8 +1,8 @@
 package com.laycoding.service.impl;
 
-import com.laycoding.entity.File;
-import com.laycoding.mapper.FileMapper;
-import com.laycoding.service.IFileService;
+import com.laycoding.entity.FileInfo;
+import com.laycoding.mapper.FileInfoMapper;
+import com.laycoding.service.IFileInfoService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +15,6 @@ import org.springframework.stereotype.Service;
  * @since 2021-10-16
  */
 @Service
-public class FileServiceImpl extends ServiceImpl<FileMapper, File> implements IFileService {
+public class FileInfoServiceImpl extends ServiceImpl<FileInfoMapper, FileInfo> implements IFileInfoService {
 
 }

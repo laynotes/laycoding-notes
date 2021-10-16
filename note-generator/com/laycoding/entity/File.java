@@ -14,7 +14,7 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author laycoding
- * @since 2021-10-15
+ * @since 2021-10-16
  */
 @TableName("sys_file")
 @ApiModel(value = "File对象", description = "")
@@ -25,24 +25,31 @@ public class File implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
+    @ApiModelProperty("用户id")
     private Integer userId;
 
+    @ApiModelProperty("文件唯一标识")
     private String fileId;
 
+    @ApiModelProperty("所属文件夹")
     private String folderId;
 
+    @ApiModelProperty("文件名")
     private String fileName;
 
+    @ApiModelProperty("文件类型")
     private Boolean fileType;
 
-    private String fileLabel;
+    @ApiModelProperty("是否公开")
+    private Boolean isShare;
 
-    private String fileSource;
+    @ApiModelProperty("是否删除")
+    private Boolean isDelete;
 
-    private String fileContent;
-
+    @ApiModelProperty("创建时间")
     private LocalDateTime createTime;
 
+    @ApiModelProperty("更新时间")
     private LocalDateTime modifyTime;
 
     public Integer getId() {
@@ -87,26 +94,19 @@ public class File implements Serializable {
     public void setFileType(Boolean fileType) {
         this.fileType = fileType;
     }
-    public String getFileLabel() {
-        return fileLabel;
+    public Boolean getIsShare() {
+        return isShare;
     }
 
-    public void setFileLabel(String fileLabel) {
-        this.fileLabel = fileLabel;
+    public void setIsShare(Boolean isShare) {
+        this.isShare = isShare;
     }
-    public String getFileSource() {
-        return fileSource;
-    }
-
-    public void setFileSource(String fileSource) {
-        this.fileSource = fileSource;
-    }
-    public String getFileContent() {
-        return fileContent;
+    public Boolean getIsDelete() {
+        return isDelete;
     }
 
-    public void setFileContent(String fileContent) {
-        this.fileContent = fileContent;
+    public void setIsDelete(Boolean isDelete) {
+        this.isDelete = isDelete;
     }
     public LocalDateTime getCreateTime() {
         return createTime;
@@ -132,9 +132,8 @@ public class File implements Serializable {
             ", folderId=" + folderId +
             ", fileName=" + fileName +
             ", fileType=" + fileType +
-            ", fileLabel=" + fileLabel +
-            ", fileSource=" + fileSource +
-            ", fileContent=" + fileContent +
+            ", isShare=" + isShare +
+            ", isDelete=" + isDelete +
             ", createTime=" + createTime +
             ", modifyTime=" + modifyTime +
         "}";

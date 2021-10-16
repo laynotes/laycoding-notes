@@ -12,17 +12,21 @@ import java.util.Collections;
 
 public class Generator {
     public static void main(String[] args) {
+
+
+        final String outDir = "D://JavaProjects/laycoding-notes/note-generator";
+
         FastAutoGenerator.create("jdbc:mysql://127.0.0.1/laycoding_notes?serverTimezone=UTC&useSSL=false", "root", "123456")
                 .globalConfig(builder -> {
                     builder.author("laycoding") // 设置作者
                             .enableSwagger() // 开启 swagger 模式
                             .fileOverride() // 覆盖已生成文件
-                            .outputDir("E://JavaProjects/laycoding-notes/note-generator"); // 指定输出目录
+                            .outputDir(outDir); // 指定输出目录
                 })
                 .packageConfig(builder -> {
                     builder.parent("com.laycoding") // 设置父包名
                             .moduleName("") // 设置父包模块名
-                            .pathInfo(Collections.singletonMap(OutputFile.mapperXml, "E://JavaProjects/laycoding-notes/note-generator")); // 设置mapperXml生成路径
+                            .pathInfo(Collections.singletonMap(OutputFile.mapperXml, outDir)); // 设置mapperXml生成路径
                 })
                 .strategyConfig(builder -> {
                     builder.addInclude(new ArrayList<>())

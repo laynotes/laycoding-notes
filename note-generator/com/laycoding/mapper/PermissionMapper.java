@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author laycoding
- * @since 2021-10-15
+ * @since 2021-10-16
  */
 public interface PermissionMapper extends BaseMapper<Permission> {
 

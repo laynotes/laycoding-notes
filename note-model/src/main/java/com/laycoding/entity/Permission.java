@@ -14,7 +14,7 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author laycoding
- * @since 2021-10-15
+ * @since 2021-10-16
  */
 @TableName("sys_permission")
 @ApiModel(value = "Permission对象", description = "权限表")
@@ -40,9 +40,11 @@ public class Permission implements Serializable {
     @ApiModelProperty("备注")
     private String description;
 
-    private LocalDateTime created;
+    @ApiModelProperty("创建时间")
+    private LocalDateTime createTime;
 
-    private LocalDateTime updated;
+    @ApiModelProperty("更新时间")
+    private LocalDateTime modifyTime;
 
     public Long getId() {
         return id;
@@ -86,19 +88,19 @@ public class Permission implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-    public LocalDateTime getCreated() {
-        return created;
+    public LocalDateTime getCreateTime() {
+        return createTime;
     }
 
-    public void setCreated(LocalDateTime created) {
-        this.created = created;
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
     }
-    public LocalDateTime getUpdated() {
-        return updated;
+    public LocalDateTime getModifyTime() {
+        return modifyTime;
     }
 
-    public void setUpdated(LocalDateTime updated) {
-        this.updated = updated;
+    public void setModifyTime(LocalDateTime modifyTime) {
+        this.modifyTime = modifyTime;
     }
 
     @Override
@@ -110,8 +112,8 @@ public class Permission implements Serializable {
             ", enname=" + enname +
             ", url=" + url +
             ", description=" + description +
-            ", created=" + created +
-            ", updated=" + updated +
+            ", createTime=" + createTime +
+            ", modifyTime=" + modifyTime +
         "}";
     }
 }

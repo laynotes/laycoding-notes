@@ -13,7 +13,7 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author laycoding
- * @since 2021-10-15
+ * @since 2021-10-16
  */
 @TableName("sys_user_role")
 @ApiModel(value = "UserRole对象", description = "用户角色表")

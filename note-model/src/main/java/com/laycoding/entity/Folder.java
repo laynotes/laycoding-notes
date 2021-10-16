@@ -14,7 +14,7 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author laycoding
- * @since 2021-10-15
+ * @since 2021-10-16
  */
 @TableName("sys_folder")
 @ApiModel(value = "Folder对象", description = "")
@@ -34,13 +34,16 @@ public class Folder implements Serializable {
     @ApiModelProperty("父id")
     private Integer parentId;
 
+    @ApiModelProperty("文件夹名称")
     private String folderName;
 
     @ApiModelProperty("是否可以编辑")
     private Boolean isEditor;
 
+    @ApiModelProperty("创建时间")
     private LocalDateTime createTime;
 
+    @ApiModelProperty("更新时间")
     private LocalDateTime modifyTime;
 
     public Integer getId() {

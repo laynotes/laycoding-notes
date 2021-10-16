@@ -59,7 +59,7 @@
                     <addResources>true</addResources>
                 </configuration>
             </plugin>
-        </plugins>
+        </plugins><!---->
 
         <resources>
             <resource>

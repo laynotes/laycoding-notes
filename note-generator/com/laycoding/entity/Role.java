@@ -14,7 +14,7 @@ import io.swagger.annotations.ApiModelProperty;
  * </p>
  *
  * @author laycoding
- * @since 2021-10-15
+ * @since 2021-10-16
  */
 @TableName("sys_role")
 @ApiModel(value = "Role对象", description = "角色表")
@@ -37,9 +37,11 @@ public class Role implements Serializable {
     @ApiModelProperty("备注")
     private String description;
 
-    private LocalDateTime created;
+    @ApiModelProperty("创建时间")
+    private LocalDateTime createTime;
 
-    private LocalDateTime updated;
+    @ApiModelProperty("创建时间")
+    private LocalDateTime modifyTime;
 
     public Long getId() {
         return id;
@@ -76,19 +78,19 @@ public class Role implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-    public LocalDateTime getCreated() {
-        return created;
+    public LocalDateTime getCreateTime() {
+        return createTime;
     }
 
-    public void setCreated(LocalDateTime created) {
-        this.created = created;
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
     }
-    public LocalDateTime getUpdated() {
-        return updated;
+    public LocalDateTime getModifyTime() {
+        return modifyTime;
     }
 
-    public void setUpdated(LocalDateTime updated) {
-        this.updated = updated;
+    public void setModifyTime(LocalDateTime modifyTime) {
+        this.modifyTime = modifyTime;
     }
 
     @Override
@@ -99,8 +101,8 @@ public class Role implements Serializable {
             ", name=" + name +
             ", enname=" + enname +
             ", description=" + description +
-            ", created=" + created +
-            ", updated=" + updated +
+            ", createTime=" + createTime +
+            ", modifyTime=" + modifyTime +
         "}";
     }
 }
