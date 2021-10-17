@@ -1,34 +1,36 @@
 package com.laycoding.dto;
 
 
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
 import java.util.Collection;
+import java.util.Map;
 
 
 public class UserDetailDTO extends User {
 
-    private Integer userId;
+    private UserInfoDTO userInfo;
 
 
     public UserDetailDTO(String username, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
 
     }
-    public UserDetailDTO(Integer userId,String username, String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserDetailDTO(UserInfoDTO userInfo,String username, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
-        this.userId=userId;
+        this.userInfo=userInfo;
     }
     public UserDetailDTO(String username, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
     }
 
-    public Integer getUserId() {
-        return userId;
+    public UserInfoDTO getUserInfo() {
+        return userInfo;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUserInfo(UserInfoDTO userInfo) {
+        this.userInfo = userInfo;
     }
 }

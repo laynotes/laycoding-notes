@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 /**
  * <p>
@@ -18,6 +19,7 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @TableName("sys_user")
 @ApiModel(value = "User对象", description = "用户表")
+@Data
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,8 +42,11 @@ public class User implements Serializable {
     @ApiModelProperty("注册邮箱")
     private String email;
 
+    @ApiModelProperty("头像")
+    private String avatar;
+
     @ApiModelProperty("禁止登入")
-    private Boolean isDelete;
+    private Integer isDelete;
 
     @ApiModelProperty("创建时间 ")
     private LocalDateTime createTime;
@@ -49,82 +54,4 @@ public class User implements Serializable {
     @ApiModelProperty("更新时间")
     private LocalDateTime modifyTime;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    public Boolean getIsDelete() {
-        return isDelete;
-    }
-
-    public void setIsDelete(Boolean isDelete) {
-        this.isDelete = isDelete;
-    }
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-    public LocalDateTime getModifyTime() {
-        return modifyTime;
-    }
-
-    public void setModifyTime(LocalDateTime modifyTime) {
-        this.modifyTime = modifyTime;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-            "id=" + id +
-            ", username=" + username +
-            ", name=" + name +
-            ", password=" + password +
-            ", phone=" + phone +
-            ", email=" + email +
-            ", isDelete=" + isDelete +
-            ", createTime=" + createTime +
-            ", modifyTime=" + modifyTime +
-        "}";
-    }
 }

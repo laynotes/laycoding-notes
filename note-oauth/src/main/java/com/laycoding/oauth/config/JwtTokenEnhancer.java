@@ -21,8 +21,8 @@ public class JwtTokenEnhancer extends JwtAccessTokenConverter {
         UserDetailDTO securityUser = (UserDetailDTO) authentication.getPrincipal();
         Map<String, Object> info = new HashMap<>();
         //把用户ID设置到JWT中
-        info.put("userInfo", securityUser.getUserId());
-//        info.put("client_id",securityUser.getClientId());
+        info.put("userInfo", securityUser.getUserInfo());
+
         ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(info);
         return accessToken;
     }

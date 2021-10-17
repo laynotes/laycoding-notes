@@ -29,9 +29,8 @@ import java.util.List;
 @EnableAuthorizationServer
 public class OauthConfig extends AuthorizationServerConfigurerAdapter {
 
-    @Resource
-    private PasswordEncoder passwordEncoder;
-
+    @Autowired
+    private UserDetailsServiceImpl userDetailsService;
 
     @Autowired
     private CustomAccessTokenConverter customAccessTokenConverter;
@@ -63,7 +62,7 @@ public class OauthConfig extends AuthorizationServerConfigurerAdapter {
         delegates.add(accessTokenConverter());
         enhancerChain.setTokenEnhancers(delegates); //配置JWT的内容增强器
         endpoints.authenticationManager(authenticationManager)
-                .userDetailsService(new UserDetailsServiceImpl()) //配置加载用户信息的服务
+                .userDetailsService(userDetailsService) //配置加载用户信息的服务
                 .accessTokenConverter(accessTokenConverter())
                 .tokenEnhancer(enhancerChain)
                 .allowedTokenEndpointRequestMethods(HttpMethod.GET,HttpMethod.POST);

@@ -23,20 +23,18 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
      *
      * @return
      */
+    @Autowired
+    private UserDetailsServiceImpl userDetailsService;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    @Override
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return new UserDetailsServiceImpl();
-    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService()).passwordEncoder(new BCryptPasswordEncoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
     }
 
     @Bean
@@ -49,11 +47,14 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/allow").permitAll()
+                .antMatchers("/user/login").permitAll()
                 .antMatchers("/test/**").authenticated()
                 .and()
                 .formLogin()
                 .loginProcessingUrl("/login")
                 .permitAll()
+                .and()
+                .logout()
                 .and()
                 .httpBasic()
                 .and()

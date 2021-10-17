@@ -20,7 +20,9 @@ public class OAuthUtil {
 
         LinkedHashMap<String, Object> decodedDetails = (LinkedHashMap<String, Object>) details.getDecodedDetails();
 
-        return decodedDetails.containsKey("userInfo") ? (Integer) decodedDetails.get("userInfo") : null;
+        LinkedHashMap<String, Object> userInfo = (LinkedHashMap<String, Object>) decodedDetails.get("userInfo");
+
+        return userInfo.containsKey("id") ? (Integer) userInfo.get("id") : null;
     }
 
 

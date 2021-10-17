@@ -13,6 +13,7 @@ public class ResourceConfig extends ResourceServerConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/allow").permitAll()
                 .antMatchers("/file/**","/folder/**").authenticated()
+                .antMatchers("/user/**").authenticated()
                 .and()
                 .formLogin()
                 .loginProcessingUrl("/login")
