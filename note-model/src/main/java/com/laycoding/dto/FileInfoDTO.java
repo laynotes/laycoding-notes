@@ -34,5 +34,5 @@ public class FileInfoDTO implements Serializable {
     private Object fileContent;
 
     private Date modifyTime;
-    
+
 }

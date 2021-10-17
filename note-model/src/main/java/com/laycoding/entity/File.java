@@ -38,13 +38,13 @@ public class File implements Serializable {
     private String fileName;
 
     @ApiModelProperty("文件类型")
-    private Boolean fileType;
+    private Integer fileType;
 
     @ApiModelProperty("是否公开")
-    private Boolean isShare;
+    private Integer isShare;
 
     @ApiModelProperty("是否删除")
-    private Boolean isDelete;
+    private Integer isDelete;
 
     @ApiModelProperty("创建时间")
     private LocalDateTime createTime;
@@ -87,25 +87,25 @@ public class File implements Serializable {
     public void setFileName(String fileName) {
         this.fileName = fileName;
     }
-    public Boolean getFileType() {
+    public Integer getFileType() {
         return fileType;
     }
 
-    public void setFileType(Boolean fileType) {
+    public void setFileType(Integer fileType) {
         this.fileType = fileType;
     }
-    public Boolean getIsShare() {
+    public Integer getIsShare() {
         return isShare;
     }
 
-    public void setIsShare(Boolean isShare) {
+    public void setIsShare(Integer isShare) {
         this.isShare = isShare;
     }
-    public Boolean getIsDelete() {
+    public Integer getIsDelete() {
         return isDelete;
     }
 
-    public void setIsDelete(Boolean isDelete) {
+    public void setIsDelete(Integer isDelete) {
         this.isDelete = isDelete;
     }
     public LocalDateTime getCreateTime() {
