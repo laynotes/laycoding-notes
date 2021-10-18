@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@Component
+
 @Slf4j
 public class CustomAuthExceptionHandler implements AuthenticationEntryPoint, AccessDeniedHandler {
     @Override
@@ -35,11 +35,11 @@ public class CustomAuthExceptionHandler implements AuthenticationEntryPoint, Acc
         if (cause instanceof InvalidTokenException) {
             log.error("InvalidTokenException : {}",cause.getMessage());
             //Token无效
-            response.getWriter().write(JSON.toJSONString(ResultUtil.defineError(new BaseException(ErrorCodeEnum.NO_AUTH.getErrorCode(),ErrorCodeEnum.NO_AUTH.getErrorMsg() ))));
+            response.getWriter().write(JSON.toJSONString(ResultUtil.defineError(new BaseException(ErrorCodeEnum.NO_AUTH.getErrorCode(),authException.getMessage()))));
         } else {
             log.error("AuthenticationException : NoAuthentication");
             //资源未授权
-            response.getWriter().write(JSON.toJSONString(ResultUtil.defineError(new BaseException(ErrorCodeEnum.NO_AUTH.getErrorCode(),ErrorCodeEnum.NO_AUTH.getErrorMsg() ))));
+            response.getWriter().write(JSON.toJSONString(ResultUtil.defineError(new BaseException(ErrorCodeEnum.NO_AUTH.getErrorCode(),authException.getMessage()))));
         }
 
     }

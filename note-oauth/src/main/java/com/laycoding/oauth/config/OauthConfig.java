@@ -1,23 +1,32 @@
 package com.laycoding.oauth.config;
 
+import com.laycoding.common.util.ResultUtil;
+import com.laycoding.service.impl.RedisServiceImpl;
 import com.laycoding.service.impl.UserDetailsServiceImpl;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
+import org.springframework.security.oauth2.provider.error.DefaultWebResponseExceptionTranslator;
+import org.springframework.security.oauth2.provider.error.WebResponseExceptionTranslator;
+import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -44,6 +53,9 @@ public class OauthConfig extends AuthorizationServerConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
 
+    @Autowired
+    RedisServiceImpl redisService;
+
     @Bean
     public JdbcClientDetailsService jdbcClientDetailsService() {
         return new JdbcClientDetailsService(dataSource);
@@ -54,23 +66,38 @@ public class OauthConfig extends AuthorizationServerConfigurerAdapter {
         clients.withClientDetails(jdbcClientDetailsService());
     }
 
-    @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+    @Bean
+
+    public DefaultTokenServices defaultTokenServices(){
         TokenEnhancerChain enhancerChain = new TokenEnhancerChain();
         List<TokenEnhancer> delegates = new ArrayList<>();
         delegates.add(jwtTokenEnhancer);
         delegates.add(accessTokenConverter());
         enhancerChain.setTokenEnhancers(delegates); //配置JWT的内容增强器
-        endpoints.authenticationManager(authenticationManager)
-                .userDetailsService(userDetailsService) //配置加载用户信息的服务
-                .accessTokenConverter(accessTokenConverter())
-                .tokenEnhancer(enhancerChain)
-                .allowedTokenEndpointRequestMethods(HttpMethod.GET,HttpMethod.POST);
+
+        CustomTokenService tokenService = new CustomTokenService(redisService);
+        tokenService.setTokenStore(jwtTokenStore());
+        tokenService.setSupportRefreshToken(true);
+        tokenService.setTokenEnhancer(enhancerChain);
+
+        return tokenService;
     }
 
     @Override
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+
+        endpoints.tokenServices(defaultTokenServices()).authenticationManager(authenticationManager)
+                .userDetailsService(userDetailsService) //配置加载用户信息的服务
+                .accessTokenConverter(accessTokenConverter())
+                .exceptionTranslator(new OAuthWebResponseExceptionTranslator())
+                .allowedTokenEndpointRequestMethods(HttpMethod.GET,HttpMethod.POST);
+    }
+
+
+
+    @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-//        .tokenKeyAccess("permitAll()")
+//        .allowFormAuthenticationForClients()
 //                .checkTokenAccess("permitAll()")
         security.allowFormAuthenticationForClients();
     }
@@ -84,6 +111,9 @@ public class OauthConfig extends AuthorizationServerConfigurerAdapter {
 
         return jwtAccessTokenConverter;
     }
-
+    @Bean
+    public JwtTokenStore jwtTokenStore(){
+        return new JwtTokenStore(accessTokenConverter());
+    }
 }
 

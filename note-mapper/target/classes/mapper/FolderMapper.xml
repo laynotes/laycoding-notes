@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.laycoding.mapper.FolderMapper">
+
+
+    <select id="listFolders" resultType="com.laycoding.dto.FolderDTO">
+        select t1.id, t1.folder_id, t1.folder_name, t1.is_editor, t1.parent_id
+        from sys_folder t1,
+             sys_user t2
+        where t1.user_id = t2.user_id
+          and t2.user_id = #{uid}
+    </select>
+</mapper>
