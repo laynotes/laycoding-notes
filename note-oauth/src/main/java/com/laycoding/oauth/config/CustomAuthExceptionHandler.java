@@ -25,13 +25,9 @@ public class CustomAuthExceptionHandler implements AuthenticationEntryPoint, Acc
 
         Throwable cause = authException.getCause();
         response.setContentType("application/json;charset=UTF-8");
-        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.setStatus(HttpServletResponse.SC_OK);
         // CORS "pre-flight" request
-        response.addHeader("Access-Control-Allow-Origin", "*");
-        response.addHeader("Cache-Control","no-cache");
-        response.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-        response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
-        response.addHeader("Access-Control-Max-Age", "1800");
+
         if (cause instanceof InvalidTokenException) {
             log.error("InvalidTokenException : {}",cause.getMessage());
             //Token无效
@@ -47,12 +43,8 @@ public class CustomAuthExceptionHandler implements AuthenticationEntryPoint, Acc
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
         response.setContentType("application/json;charset=UTF-8");
-        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        response.addHeader("Access-Control-Allow-Origin", "*");
-        response.addHeader("Cache-Control","no-cache");
-        response.addHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-        response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
-        response.addHeader("Access-Control-Max-Age", "1800");
+        response.setStatus(HttpServletResponse.SC_OK);
+
         //访问资源的用户权限不足
         log.error("AccessDeniedException : {}",accessDeniedException.getMessage());
         response.getWriter().write(JSON.toJSONString(ResultUtil.defineError(new BaseException(ErrorCodeEnum.NO_AUTH.getErrorCode(),ErrorCodeEnum.NO_AUTH.getErrorMsg() ))));

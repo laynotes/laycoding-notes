@@ -39,5 +39,13 @@ public interface IUserService extends IService<User> {
      * @param refreshToken
      * @return
      */
-    ResultUtil<AccessTokenDTO> logout(TokenEndpoint endpoint,String refreshToken);
+    ResultUtil<Object> logout(TokenEndpoint endpoint,String refreshToken);
+
+    /**
+     * 刷新token
+     * @param endpoint
+     * @param refreshToken
+     * @return
+     */
+    ResultUtil<AccessTokenDTO> refreshToken(TokenEndpoint endpoint,String refreshToken);
 }

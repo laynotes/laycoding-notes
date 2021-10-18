@@ -20,6 +20,8 @@ import org.springframework.security.web.authentication.preauth.AbstractPreAuthen
 public class ResourceConfig extends ResourceServerConfigurerAdapter {
 
 
+    @Autowired
+    private DefaultTokenServices defaultTokenServices;
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
@@ -41,7 +43,7 @@ public class ResourceConfig extends ResourceServerConfigurerAdapter {
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-       resources.accessDeniedHandler(new CustomAuthExceptionHandler()).authenticationEntryPoint(new CustomAuthExceptionHandler());
+       resources.tokenServices(defaultTokenServices).accessDeniedHandler(new CustomAuthExceptionHandler()).authenticationEntryPoint(new CustomAuthExceptionHandler());
        super.configure(resources);
     }
 }

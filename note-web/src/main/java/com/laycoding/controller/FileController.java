@@ -32,7 +32,7 @@ public class FileController {
     @RequestMapping("/listFiles")
     public ResultUtil<List<FileDTO>> listFiles(Integer type,String folderId){
 
-        return fileService.listFiles(1,folderId);
+        return fileService.listFiles(type,folderId);
     }
 
     @RequestMapping(value = "/getFileInfoById",method = RequestMethod.GET)

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -67,7 +68,8 @@ public class OauthConfig extends AuthorizationServerConfigurerAdapter {
     }
 
     @Bean
-
+    @Primary
+    @Order(0)
     public DefaultTokenServices defaultTokenServices(){
         TokenEnhancerChain enhancerChain = new TokenEnhancerChain();
         List<TokenEnhancer> delegates = new ArrayList<>();
@@ -90,7 +92,7 @@ public class OauthConfig extends AuthorizationServerConfigurerAdapter {
                 .userDetailsService(userDetailsService) //配置加载用户信息的服务
                 .accessTokenConverter(accessTokenConverter())
                 .exceptionTranslator(new OAuthWebResponseExceptionTranslator())
-                .allowedTokenEndpointRequestMethods(HttpMethod.GET,HttpMethod.POST);
+                .allowedTokenEndpointRequestMethods(HttpMethod.POST);
     }
 
 

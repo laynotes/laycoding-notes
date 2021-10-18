@@ -9,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.endpoint.TokenEndpoint;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,17 +26,22 @@ public class OauthController {
     @Autowired
     IUserService userService;
 
-    @RequestMapping("/login")
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResultUtil<AccessTokenDTO> login(@RequestParam String username, @RequestParam String password) {
 
         return userService.login(endpoint, username, password);
     }
 
-    @RequestMapping("/logout")
-    public ResultUtil<AccessTokenDTO> logout( @RequestParam String refreshToken) {
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    public ResultUtil<Object> logout(@RequestParam String refreshToken) {
 
-        return userService.logout(endpoint,refreshToken);
+        return userService.logout(endpoint, refreshToken);
     }
 
+    @RequestMapping(value = "/refresh", method = RequestMethod.POST)
+    public ResultUtil<AccessTokenDTO> refresh(@RequestParam String refreshToken) {
+
+        return userService.refreshToken(endpoint, refreshToken);
+    }
 
 }
