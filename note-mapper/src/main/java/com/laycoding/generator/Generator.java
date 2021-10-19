@@ -29,7 +29,7 @@ public class Generator {
                             .pathInfo(Collections.singletonMap(OutputFile.mapperXml, outDir)); // 设置mapperXml生成路径
                 })
                 .strategyConfig(builder -> {
-                    builder.addInclude(new ArrayList<>())
+                    builder.addInclude("sys_file_info")
                             .addTablePrefix("sys_", "sys_"); // 设置过滤表前缀
                 })
                 .templateEngine(new FreemarkerTemplateEngine()) // 使用Freemarker引擎模板，默认的是Velocity引擎模板

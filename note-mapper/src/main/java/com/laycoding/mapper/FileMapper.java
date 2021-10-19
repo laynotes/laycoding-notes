@@ -4,6 +4,7 @@ import com.laycoding.dto.FileDTO;
 import com.laycoding.dto.FileInfoDTO;
 import com.laycoding.entity.File;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.laycoding.entity.FileInfo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -35,4 +36,10 @@ public interface FileMapper extends BaseMapper<File> {
     */
    FileInfoDTO getFileInfoById(Integer uid,String fileId);
 
+   /**
+    * 添加文件详情
+    * @param fileInfo
+    * @return
+    */
+   Integer insertFileInfo(FileInfo fileInfo);
 }

@@ -27,6 +27,8 @@
 
     <resultMap id="fileInfo" type="com.laycoding.dto.FileInfoDTO">
         <id column="id" property="id" />
+        <result column="file_name" jdbcType="VARCHAR" property="fileName"/>
+        <result column="file_type" property="fileType" />
         <result column="file_label" jdbcType="VARCHAR" property="fileLabel" typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler" />
         <result column="file_config" jdbcType="VARCHAR" property="fileConfig" typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler" />
         <result column="file_source" property="fileSource" />
@@ -34,11 +36,15 @@
         <result column="modify_time" property="modifyTime"/>
     </resultMap>
     <select id="getFileInfoById" resultMap="fileInfo">
-        select t1.*
+        select t1.* ,t2.file_name ,t2.file_type
         from sys_file_info t1,
              sys_file t2
         where t1.file_id = t2.file_id
           and t2.user_id = #{param1}
           and t1.file_id = #{param2}
     </select>
+
+    <insert id="insertFileInfo" parameterType="com.laycoding.dto.FileInfoDTO">
+
+    </insert>
 </mapper>

@@ -5,13 +5,14 @@ import com.laycoding.dto.FileDTO;
 import com.laycoding.dto.FileInfoDTO;
 import com.laycoding.entity.File;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.laycoding.vo.FileInfoVO;
 import io.swagger.models.auth.In;
 
 import java.util.List;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author laycoding
@@ -20,15 +21,25 @@ import java.util.List;
 public interface IFileService extends IService<File> {
     /**
      * 获取文件列表
+     *
      * @param type
      * @return
      */
-    ResultUtil<List<FileDTO>> listFiles(Integer type,String folderId);
+    ResultUtil<List<FileDTO>> listFiles(Integer type, String folderId);
 
     /**
      * 获取文件详情
+     *
      * @param fileId
      * @return
      */
     ResultUtil<FileInfoDTO> getFileInfoById(String fileId);
+
+    /**
+     * 新增文件
+     *
+     * @param fileInfoVO
+     * @return
+     */
+    ResultUtil<Object> insertFile(FileInfoVO fileInfoVO);
 }
