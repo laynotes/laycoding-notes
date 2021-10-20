@@ -38,8 +38,9 @@ public interface IFileService extends IService<File> {
     /**
      * 新增文件
      *
-     * @param fileInfoVO
-     * @return
-     */
+     * @param fileInfoVO 文件详情
+     * @return ResultUtil<Object>
+     * @author laycoding
+     **/
     ResultUtil<Object> insertFile(FileInfoVO fileInfoVO);
 }

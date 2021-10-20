@@ -45,8 +45,6 @@ public class FileController {
     @RequestMapping(value = "/insertFile",method = RequestMethod.POST)
     public ResultUtil<Object> insertFile(@RequestBody FileInfoVO fileInfoVO){
 
-        ResultUtil<Object> objectResultUtil = fileService.insertFile(fileInfoVO);
-
-        return objectResultUtil;
+        return fileService.insertFile(fileInfoVO);
     }
 }
