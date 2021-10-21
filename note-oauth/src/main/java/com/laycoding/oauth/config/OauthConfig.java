@@ -101,7 +101,7 @@ public class OauthConfig extends AuthorizationServerConfigurerAdapter {
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
 //        .allowFormAuthenticationForClients()
 //                .checkTokenAccess("permitAll()")
-        security.allowFormAuthenticationForClients();
+      //  security.allowFormAuthenticationForClients();
     }
 
     @Bean

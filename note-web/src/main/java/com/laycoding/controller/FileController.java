@@ -7,12 +7,12 @@ import com.laycoding.dto.FileInfoDTO;
 import com.laycoding.entity.File;
 import com.laycoding.service.IFileService;
 import com.laycoding.vo.FileInfoVO;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,6 +24,7 @@ import java.util.List;
  * @author laycoding
  * @since 2021-10-15
  */
+@Api(tags = "文件api")
 @RestController
 @RequestMapping("/file")
 public class FileController {
@@ -31,17 +32,29 @@ public class FileController {
     @Autowired
     private IFileService fileService;
 
-    @RequestMapping("/listFiles")
-    public ResultUtil<List<FileDTO>> listFiles(Integer type,String folderId){
+
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "type",value = "文件夹类型",required = true),
+            @ApiImplicitParam(name = "folderId",value = "文件夹id",required = false)
+            })
+    @ApiOperation(value = "根据文件夹id获取文件夹下的文件")
+    @RequestMapping(value = "/listFiles",method = RequestMethod.GET)
+    public ResultUtil<List<FileDTO>> listFiles(Integer type, String folderId){
 
         return fileService.listFiles(type,folderId);
     }
-
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "fileId",value = "文件id",required = true)
+    })
+    @ApiOperation(value = "获取文件详情")
     @RequestMapping(value = "/getFileInfoById",method = RequestMethod.GET)
     public ResultUtil<FileInfoDTO> getFileInfoById(String fileId){
         return fileService.getFileInfoById(fileId);
     }
-
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "fileInfoVO",value = "文件详情",required = true)
+    })
+    @ApiOperation(value = "上传文件")
     @RequestMapping(value = "/insertFile",method = RequestMethod.POST)
     public ResultUtil<Object> insertFile(@RequestBody FileInfoVO fileInfoVO){
 
