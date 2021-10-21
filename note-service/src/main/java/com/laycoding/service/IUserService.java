@@ -1,14 +1,10 @@
 package com.laycoding.service;
 
-import com.laycoding.common.util.ResultUtil;
+import com.laycoding.common.utils.ResultUtil;
 import com.laycoding.dto.AccessTokenDTO;
 import com.laycoding.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
-import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.endpoint.TokenEndpoint;
-
-
-import java.util.Map;
 
 /**
  * <p>

@@ -1,4 +1,4 @@
-package com.laycoding.common.util;
+package com.laycoding.common.utils;
 
 
 import org.springframework.security.core.Authentication;

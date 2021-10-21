@@ -2,14 +2,12 @@ package com.laycoding.oauth.config;
 
 import com.laycoding.common.enums.ErrorCodeEnum;
 import com.laycoding.common.exceptions.BaseException;
-import com.laycoding.common.util.ResultUtil;
+import com.laycoding.common.utils.ResultUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.oauth2.common.exceptions.InvalidGrantException;
 import org.springframework.security.oauth2.common.exceptions.InvalidTokenException;
-import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
 import org.springframework.security.oauth2.common.exceptions.UnsupportedGrantTypeException;
-import org.springframework.security.oauth2.provider.error.DefaultWebResponseExceptionTranslator;
 import org.springframework.security.oauth2.provider.error.WebResponseExceptionTranslator;
 
 import javax.security.auth.message.AuthException;

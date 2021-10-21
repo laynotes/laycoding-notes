@@ -1,4 +1,4 @@
-package com.laycoding.common.util;
+package com.laycoding.common.utils;
 
 import com.laycoding.common.enums.ErrorCodeEnum;
 import com.laycoding.common.exceptions.BaseException;

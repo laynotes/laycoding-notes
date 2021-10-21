@@ -2,8 +2,7 @@ package com.laycoding.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.laycoding.common.enums.RedisKeyEnum;
-import com.laycoding.common.util.OAuthUtil;
-import com.laycoding.common.util.ResultUtil;
+import com.laycoding.common.utils.ResultUtil;
 import com.laycoding.dto.AccessTokenDTO;
 import com.laycoding.dto.UserInfoDTO;
 import com.laycoding.entity.User;
@@ -12,7 +11,6 @@ import com.laycoding.service.IUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
@@ -20,7 +18,6 @@ import org.springframework.security.oauth2.provider.endpoint.TokenEndpoint;
 import org.springframework.stereotype.Service;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;

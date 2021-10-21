@@ -2,7 +2,7 @@ package com.laycoding.config;
 
 import com.laycoding.common.enums.ErrorCodeEnum;
 import com.laycoding.common.exceptions.BaseException;
-import com.laycoding.common.util.ResultUtil;
+import com.laycoding.common.utils.ResultUtil;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;

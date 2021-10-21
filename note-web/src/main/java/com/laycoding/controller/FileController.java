@@ -1,10 +1,9 @@
 package com.laycoding.controller;
 
 
-import com.laycoding.common.util.ResultUtil;
+import com.laycoding.common.utils.ResultUtil;
 import com.laycoding.dto.FileDTO;
 import com.laycoding.dto.FileInfoDTO;
-import com.laycoding.entity.File;
 import com.laycoding.service.IFileService;
 import com.laycoding.vo.FileInfoVO;
 import io.swagger.annotations.Api;
@@ -18,7 +17,7 @@ import java.util.List;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author laycoding
@@ -34,29 +33,32 @@ public class FileController {
 
 
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "type",value = "文件夹类型",required = true),
-            @ApiImplicitParam(name = "folderId",value = "文件夹id",required = false)
-            })
+            @ApiImplicitParam(name = "type", value = "文件夹类型", required = true),
+            @ApiImplicitParam(name = "folderId", value = "文件夹id", required = false)
+    })
     @ApiOperation(value = "根据文件夹id获取文件夹下的文件")
-    @RequestMapping(value = "/listFiles",method = RequestMethod.GET)
-    public ResultUtil<List<FileDTO>> listFiles(Integer type, String folderId){
+    @RequestMapping(value = "/listFiles", method = RequestMethod.GET)
+    public ResultUtil<List<FileDTO>> listFiles(Integer type, String folderId) {
 
-        return fileService.listFiles(type,folderId);
+        return fileService.listFiles(type, folderId);
     }
+
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "fileId",value = "文件id",required = true)
+            @ApiImplicitParam(name = "fileId", value = "文件id", required = true)
     })
     @ApiOperation(value = "获取文件详情")
-    @RequestMapping(value = "/getFileInfoById",method = RequestMethod.GET)
-    public ResultUtil<FileInfoDTO> getFileInfoById(String fileId){
+    @RequestMapping(value = "/getFileInfoById", method = RequestMethod.GET)
+    public ResultUtil<FileInfoDTO> getFileInfoById(String fileId) {
         return fileService.getFileInfoById(fileId);
     }
+
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "fileInfoVO",value = "文件详情",required = true)
+            @ApiImplicitParam(name = "fileInfoVO", value = "文件详情", required = true)
     })
     @ApiOperation(value = "上传文件")
-    @RequestMapping(value = "/insertFile",method = RequestMethod.POST)
-    public ResultUtil<Object> insertFile(@RequestBody FileInfoVO fileInfoVO){
+
+    @RequestMapping(value = "/insertFile", method = RequestMethod.POST)
+    public ResultUtil<Object> insertFile(@RequestBody FileInfoVO fileInfoVO) {
 
         return fileService.insertFile(fileInfoVO);
     }

@@ -18,8 +18,8 @@ public class Knife4jConfiguration {
     public Docket defaultApi2() {
         Docket docket=new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(new ApiInfoBuilder()
-                        //.title("swagger-bootstrap-ui-demo RESTful APIs")
-                        .description("# swagger-bootstrap-ui-demo RESTful APIs")
+                        .title("laycoding-notes")
+                        .description("# laycoding-notes RESTful APIs")
                         .termsOfServiceUrl("http://www.xx.com/")
                         .contact("laycoding@163.com")
                         .version("1.0")
