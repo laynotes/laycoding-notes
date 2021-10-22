@@ -3,11 +3,35 @@
 <mapper namespace="com.laycoding.mapper.FolderMapper">
 
 
-    <select id="listFolders" resultType="com.laycoding.dto.FolderDTO">
-        select t1.id, t1.folder_id, t1.folder_name, t1.is_editor, t1.parent_id
-        from sys_folder t1,
-             sys_user t2
-        where t1.user_id = t2.user_id
-          and t2.user_id = #{uid}
+    <resultMap id="listFolderMap" type="com.laycoding.dto.FolderDTO">
+        <id column="id" property="id"/>
+        <result column="folder_id" property="folderId"/>
+        <result column="folder_name" property="folderName"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="is_editor" property="isEditor"/>
+        <collection property="children">
+            <id column="id" property="id"/>
+            <result column="folder_id" property="folderId"/>
+            <result column="folder_name" property="folderName"/>
+            <result column="parent_id" property="parentId"/>
+            <result column="is_editor" property="isEditor"/>
+        </collection>
+
+    </resultMap>
+
+
+    <select id="listFolders" resultMap="listFolderMap">
+        SELECT t1.id,
+               t1.folder_id,
+               t1.folder_name,
+               t1.is_editor,
+               t1.parent_id,
+               t2.*
+        FROM sys_folder t1
+                 LEFT JOIN sys_folder t2 ON t1.id = t2.parent_id
+        WHERE t1.parent_id = 0
+          and t1.user_id = #{uid}
     </select>
+
+
 </mapper>

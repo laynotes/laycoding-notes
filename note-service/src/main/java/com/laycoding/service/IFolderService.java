@@ -31,4 +31,19 @@ public interface IFolderService extends IService<Folder> {
      * @return ResultUtil<Boolean>
      */
     ResultUtil<Boolean> saveFolder(Integer folderId, String folderName);
+
+    /**
+     * 更新归档名称
+     * @param folderId
+     * @param folderName
+     * @return
+     */
+    ResultUtil<Boolean> updateFolderName(String folderId,String folderName);
+
+    /**
+     * 删除归档
+     * @param folderId
+     * @return
+     */
+    ResultUtil<Boolean> deleteFolder(String folderId);
 }

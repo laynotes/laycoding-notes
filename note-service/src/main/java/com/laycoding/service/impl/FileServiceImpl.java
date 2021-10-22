@@ -84,4 +84,15 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, File> implements IF
         }
         return ResultUtil.success(true);
     }
+
+    @Override
+    public ResultUtil<Boolean> deleteFile(String fileId) {
+        QueryWrapper<File> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("file_id", fileId);
+        int delete = this.baseMapper.delete(queryWrapper);
+        if (delete < 1) {
+            return ResultUtil.success(false);
+        }
+        return ResultUtil.success(true);
+    }
 }

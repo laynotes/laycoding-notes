@@ -62,4 +62,10 @@ public class FileController {
 
         return fileService.insertFile(fileInfoVO);
     }
+
+    @RequestMapping(value = "/deleteFile", method = RequestMethod.DELETE)
+    public ResultUtil<Boolean> deleteFile(String fileId) {
+
+        return fileService.deleteFile(fileId);
+    }
 }

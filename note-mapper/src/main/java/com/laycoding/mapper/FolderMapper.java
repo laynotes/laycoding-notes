@@ -3,6 +3,7 @@ package com.laycoding.mapper;
 import com.laycoding.dto.FolderDTO;
 import com.laycoding.entity.Folder;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import io.swagger.models.auth.In;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -19,9 +20,12 @@ import java.util.List;
 public interface FolderMapper extends BaseMapper<Folder> {
 
     /**
-     * 根据用户id获取文件夹列表
+     * 获取归档
      * @param uid
+     * @param folderId
      * @return
      */
-    List<FolderDTO> listFolders(Integer uid);
+    List<FolderDTO> listFolders(Integer uid,String folderId);
+
+
 }

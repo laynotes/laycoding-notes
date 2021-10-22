@@ -1,12 +1,18 @@
 package com.laycoding.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.laycoding.common.utils.LayUtils;
 import com.laycoding.common.utils.OAuthUtil;
 import com.laycoding.common.utils.ResultUtil;
+import com.laycoding.dto.FileDTO;
 import com.laycoding.dto.FolderDTO;
 import com.laycoding.entity.Folder;
+import com.laycoding.mapper.FileMapper;
 import com.laycoding.mapper.FolderMapper;
+import com.laycoding.service.IFileService;
 import com.laycoding.service.IFolderService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,22 +36,17 @@ public class FolderServiceImpl extends ServiceImpl<FolderMapper, Folder> impleme
     @Autowired
     OAuthUtil oAuthUtil;
 
+    @Autowired
+    FileMapper fileMapper;
 
     @Override
     public ResultUtil<List<FolderDTO>> listFolders() {
 
         Integer userId = oAuthUtil.getUserId();
 
-        List<FolderDTO> folderList = this.baseMapper.listFolders(userId);
+        List<FolderDTO> folderList = this.baseMapper.listFolders(userId, null);
 
-        List<FolderDTO> parentList = folderList.stream().filter(obj -> {
-            return obj.getParentId() == 0;
-        }).map(obj -> {
-            obj.setChildren(new ArrayList<>());
-            return makeTree(folderList, obj);
-        }).collect(Collectors.toList());
-
-        return ResultUtil.success(parentList);
+        return ResultUtil.success(folderList);
     }
 
     @Override
@@ -56,9 +57,8 @@ public class FolderServiceImpl extends ServiceImpl<FolderMapper, Folder> impleme
 
         Folder folder = new Folder();
 
-        UUID uuid = UUID.randomUUID();
         folder.setUserId(userId);
-        folder.setFolderId(uuid.toString());
+        folder.setFolderId(LayUtils.getUuid());
         folder.setFolderName(folderName);
         folder.setParentId(folderId);
 
@@ -69,22 +69,44 @@ public class FolderServiceImpl extends ServiceImpl<FolderMapper, Folder> impleme
         return ResultUtil.success(true);
     }
 
-    /**
-     * 构建文件夹树
-     *
-     * @param list
-     * @param folderDTO
-     * @return
-     */
-    public FolderDTO makeTree(List<FolderDTO> list, FolderDTO folderDTO) {
-        List<FolderDTO> children = folderDTO.getChildren();
-        list.stream().filter(obj -> {
-            return obj.getParentId() > 0;
-        }).forEach(obj -> {
-            if (folderDTO.getId().equals(obj.getParentId())) {
-                children.add(obj);
-            }
-        });
-        return folderDTO;
+    @Override
+    public ResultUtil<Boolean> updateFolderName(String folderId, String folderName) {
+        Integer userId = oAuthUtil.getUserId();
+
+        QueryWrapper<Folder> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_id", userId);
+        queryWrapper.eq("folder_id", folderId);
+        Folder folder = new Folder();
+        folder.setFolderName(folderName);
+        int update = this.baseMapper.update(folder, queryWrapper);
+        if (update < 1) {
+            return ResultUtil.success(false);
+        }
+        return ResultUtil.success(true);
     }
+
+    @Override
+    public ResultUtil<Boolean> deleteFolder(String folderId) {
+        Integer userId = oAuthUtil.getUserId();
+        QueryWrapper<Folder> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_id", userId);
+        queryWrapper.eq("folder_id", folderId);
+
+        List<FileDTO> fileDTOS = fileMapper.listFiles(userId, folderId);
+        if (!fileDTOS.isEmpty()) {
+            return ResultUtil.success(false);
+        }
+        List<FolderDTO> folderDTOS = this.baseMapper.listFolders(userId, folderId);
+
+        if (!folderDTOS.isEmpty() && !folderDTOS.get(0).getChildren().isEmpty()) {
+            return ResultUtil.success(false);
+        }
+
+        int delete = this.baseMapper.delete(queryWrapper);
+        if (delete < 1) {
+            return ResultUtil.success(false);
+        }
+        return ResultUtil.success(true);
+    }
+
 }

@@ -42,4 +42,11 @@ public interface IFileService extends IService<File> {
      * @author laycoding
      **/
     ResultUtil<Object> insertFile(FileInfoVO fileInfoVO);
+
+    /**
+     * 删除文件
+     * @param fileId
+     * @return
+     */
+    ResultUtil<Boolean> deleteFile(String fileId);
 }

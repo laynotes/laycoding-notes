@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -42,11 +43,28 @@ public class FolderController {
     @ApiOperation(value = "新增归档")
     @ApiImplicitParams({
             @ApiImplicitParam(value = "folderId", name = "父归档id"),
-            @ApiImplicitParam(value = "folderName", name = "归档名称",required = true)
+            @ApiImplicitParam(value = "folderName", name = "归档名称", required = true)
     }
     )
-    @RequestMapping(value = "/saveFolder",method = RequestMethod.POST)
-    public ResultUtil<Boolean> saveFolder(Integer folderId, String folderName) {
-        return folderService.saveFolder(folderId, folderName);
+    @RequestMapping(value = "/saveFolder", method = RequestMethod.POST)
+    public ResultUtil<Boolean> saveFolder(Integer parentId, @RequestParam String folderName) {
+        return folderService.saveFolder(parentId, folderName);
+    }
+
+    @RequestMapping(value = "updateFolderName", method = RequestMethod.POST)
+    @ApiOperation(value = "更新归档名称")
+    @ApiImplicitParams({
+            @ApiImplicitParam(value = "id", name = "归档id"),
+            @ApiImplicitParam(value = "name", name = "归档名称", required = true)
+    }
+    )
+    public ResultUtil<Boolean> updateFolderName(String id, String name) {
+        return folderService.updateFolderName(id, name);
+    }
+    @ApiOperation(value = "删除归档")
+    @RequestMapping(value = "/deleteFolder", method = RequestMethod.DELETE)
+    public ResultUtil<Boolean> deleteFolder(String folderId) {
+
+        return folderService.deleteFolder(folderId);
     }
 }
