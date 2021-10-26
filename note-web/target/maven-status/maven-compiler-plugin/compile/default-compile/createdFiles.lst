@@ -1,0 +1,13 @@
+com\laycoding\NoteApplication.class
+com\laycoding\config\GlobalExceptionHandler.class
+com\laycoding\controller\OauthController.class
+com\laycoding\controller\RolePermissionController.class
+com\laycoding\controller\FileController.class
+com\laycoding\config\CORSFilter.class
+com\laycoding\controller\UserController.class
+com\laycoding\controller\UserRoleController.class
+com\laycoding\controller\FolderController.class
+com\laycoding\config\Knife4jConfiguration.class
+com\laycoding\controller\RoleController.class
+com\laycoding\config\RedisConfig.class
+com\laycoding\controller\PermissionController.class

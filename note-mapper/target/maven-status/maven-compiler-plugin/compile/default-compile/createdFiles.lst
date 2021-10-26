@@ -1,0 +1,10 @@
+com\laycoding\mapper\UserMapper.class
+com\laycoding\mapper\FileInfoMapper.class
+com\laycoding\mapper\UserRoleMapper.class
+com\laycoding\mapper\FileMapper.class
+com\laycoding\mapper\FolderMapper.class
+com\laycoding\config\MyBatisPlusHandler.class
+com\laycoding\generator\Generator.class
+com\laycoding\mapper\RoleMapper.class
+com\laycoding\mapper\PermissionMapper.class
+com\laycoding\mapper\RolePermissionMapper.class

@@ -34,9 +34,9 @@ spring:
       connection-timeout: 30000
 mybatis-plus:
   configuration:
-   map-underscore-to-camel-case: true
-   auto-mapping-behavior: full
-   log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+    auto-mapping-behavior: full
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: classpath:com/laycoding/mapper/xml/*.xml
 #日志
 logging:

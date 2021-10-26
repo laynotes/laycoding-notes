@@ -51,16 +51,6 @@ public class FolderController {
         return folderService.saveFolder(parentId, folderName);
     }
 
-    @RequestMapping(value = "updateFolderName", method = RequestMethod.POST)
-    @ApiOperation(value = "更新归档名称")
-    @ApiImplicitParams({
-            @ApiImplicitParam(value = "id", name = "归档id"),
-            @ApiImplicitParam(value = "name", name = "归档名称", required = true)
-    }
-    )
-    public ResultUtil<Boolean> updateFolderName(String id, String name) {
-        return folderService.updateFolderName(id, name);
-    }
     @ApiOperation(value = "删除归档")
     @RequestMapping(value = "/deleteFolder", method = RequestMethod.DELETE)
     public ResultUtil<Boolean> deleteFolder(String folderId) {

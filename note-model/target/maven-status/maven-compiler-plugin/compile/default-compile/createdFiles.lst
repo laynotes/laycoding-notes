@@ -1,0 +1,15 @@
+com\laycoding\entity\UserRole.class
+com\laycoding\vo\FileInfoVO.class
+com\laycoding\dto\AccessTokenDTO.class
+com\laycoding\entity\RolePermission.class
+com\laycoding\dto\FileInfoDTO.class
+com\laycoding\entity\File.class
+com\laycoding\dto\FolderDTO.class
+com\laycoding\entity\Permission.class
+com\laycoding\entity\Folder.class
+com\laycoding\entity\FileInfo.class
+com\laycoding\dto\FileDTO.class
+com\laycoding\dto\UserDetailDTO.class
+com\laycoding\dto\UserInfoDTO.class
+com\laycoding\entity\Role.class
+com\laycoding\entity\User.class

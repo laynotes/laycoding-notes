@@ -6,6 +6,7 @@ import com.laycoding.dto.FileDTO;
 import com.laycoding.dto.FileInfoDTO;
 import com.laycoding.service.IFileService;
 import com.laycoding.vo.FileInfoVO;
+import com.laycoding.vo.FileUpdateVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -31,11 +32,6 @@ public class FileController {
     @Autowired
     private IFileService fileService;
 
-
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "type", value = "文件夹类型", required = true),
-            @ApiImplicitParam(name = "folderId", value = "文件夹id", required = false)
-    })
     @ApiOperation(value = "根据文件夹id获取文件夹下的文件")
     @RequestMapping(value = "/listFiles", method = RequestMethod.GET)
     public ResultUtil<List<FileDTO>> listFiles(Integer type, String folderId) {
@@ -67,5 +63,11 @@ public class FileController {
     public ResultUtil<Boolean> deleteFile(String fileId) {
 
         return fileService.deleteFile(fileId);
+    }
+
+
+    @RequestMapping(value = "/updateFileName", method = RequestMethod.POST)
+    public ResultUtil<Boolean> updateFileName(@RequestBody FileUpdateVO fileUpdateVO) {
+        return fileService.updateFileName(fileUpdateVO);
     }
 }

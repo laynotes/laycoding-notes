@@ -1,0 +1,9 @@
+com\laycoding\oauth\config\CustomAccessTokenConverter.class
+com\laycoding\oauth\config\JwtTokenEnhancer.class
+com\laycoding\oauth\config\ResourceConfig.class
+com\laycoding\oauth\config\CustomAuthExceptionHandler.class
+com\laycoding\oauth\config\OauthConfig.class
+com\laycoding\oauth\config\OAuthWebResponseExceptionTranslator.class
+com\laycoding\oauth\config\MyAuthenticationSuccessHandler.class
+com\laycoding\oauth\config\WebSecurityConfiguration.class
+com\laycoding\oauth\config\CustomTokenService.class

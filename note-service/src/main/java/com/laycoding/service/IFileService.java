@@ -6,6 +6,7 @@ import com.laycoding.dto.FileInfoDTO;
 import com.laycoding.entity.File;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.laycoding.vo.FileInfoVO;
+import com.laycoding.vo.FileUpdateVO;
 
 import java.util.List;
 
@@ -49,4 +50,11 @@ public interface IFileService extends IService<File> {
      * @return
      */
     ResultUtil<Boolean> deleteFile(String fileId);
+
+    /**
+     * 更新文件/归档名称
+     * @param fileUpdateVO
+     * @return
+     */
+    ResultUtil<Boolean> updateFileName(FileUpdateVO fileUpdateVO);
 }

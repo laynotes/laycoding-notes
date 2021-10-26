@@ -9,11 +9,14 @@ import com.laycoding.dto.FileDTO;
 import com.laycoding.dto.FileInfoDTO;
 import com.laycoding.entity.File;
 import com.laycoding.entity.FileInfo;
+import com.laycoding.entity.Folder;
 import com.laycoding.mapper.FileInfoMapper;
 import com.laycoding.mapper.FileMapper;
 import com.laycoding.service.IFileService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.laycoding.service.IFolderService;
 import com.laycoding.vo.FileInfoVO;
+import com.laycoding.vo.FileUpdateVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +40,9 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, File> implements IF
 
     @Autowired
     private FileInfoMapper fileInfoMapper;
+
+    @Autowired
+    IFolderService iFolderService;
 
     @Override
     public ResultUtil<List<FileDTO>> listFiles(Integer type, String folderId) {
@@ -94,5 +100,23 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, File> implements IF
             return ResultUtil.success(false);
         }
         return ResultUtil.success(true);
+    }
+
+    @Override
+    public ResultUtil<Boolean> updateFileName(FileUpdateVO fileUpdateVO) {
+        Integer userId = oAuthUtil.getUserId();
+        if (fileUpdateVO.getType().equals(1)) {
+            QueryWrapper<File> fileQueryWrapper = new QueryWrapper<>();
+            fileQueryWrapper.eq("file_id", fileUpdateVO.getId());
+            fileQueryWrapper.eq("user_id", userId);
+            File file = new File();
+            file.setFileName(fileUpdateVO.getName());
+            int update = this.baseMapper.update(file, fileQueryWrapper);
+            if (update > 0) {
+                return ResultUtil.success(true);
+            }
+            return ResultUtil.success(false);
+        }
+        return iFolderService.updateFolderName(fileUpdateVO.getId(), fileUpdateVO.getName());
     }
 }

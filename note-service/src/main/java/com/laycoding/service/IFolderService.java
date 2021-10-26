@@ -46,4 +46,5 @@ public interface IFolderService extends IService<Folder> {
      * @return
      */
     ResultUtil<Boolean> deleteFolder(String folderId);
+
 }
