@@ -28,8 +28,9 @@ public class ResourceConfig extends ResourceServerConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/oauth/**").permitAll()
+                .antMatchers("/upload/**").permitAll()
                 .antMatchers("/file/**","/folder/**").authenticated()
-                .antMatchers("/user/**").authenticated()
+                .antMatchers("/oss/**").authenticated()
                 .and()
                 .httpBasic()
                 .and()

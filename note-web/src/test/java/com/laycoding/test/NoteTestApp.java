@@ -25,6 +25,7 @@ public class NoteTestApp {
         message.setText("邮件内容");
         message.setTo("1940758238@qq.com");
         message.setFrom("laycoding@163.com");
+
         javaMailSender.send(message);
        // return "简单邮件发送成功！"
     }

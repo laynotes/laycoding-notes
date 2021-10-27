@@ -38,7 +38,7 @@ public class OssConfig implements Serializable {
     private Boolean ossType;
 
     @ApiModelProperty("配置详情")
-    private String ossConfig;
+    private Object ossConfig;
 
     private LocalDateTime createTime;
 

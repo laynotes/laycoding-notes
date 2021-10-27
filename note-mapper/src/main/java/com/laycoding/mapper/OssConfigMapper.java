@@ -2,6 +2,7 @@ package com.laycoding.mapper;
 
 import com.laycoding.entity.OssConfig;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * <p>
@@ -11,6 +12,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author laycoding
  * @since 2021-10-27
  */
+@Mapper
 public interface OssConfigMapper extends BaseMapper<OssConfig> {
 
 }

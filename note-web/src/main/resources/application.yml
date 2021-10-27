@@ -5,3 +5,8 @@ server:
 spring:
   profiles:
     active: dev
+
+
+local-oss:
+  windows: D:/laycoding-oss/upload/
+  linux: /var/local/laycoding-oss/upload/

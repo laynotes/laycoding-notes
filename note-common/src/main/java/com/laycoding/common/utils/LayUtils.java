@@ -11,12 +11,19 @@ public class LayUtils {
 
     /**
      * 获取uuid
+     *
      * @return
      */
-    public static String getUuid(){
+    public static String getUuid() {
         UUID uuid = UUID.randomUUID();
-        return uuid.toString().replaceAll("-","");
+        return uuid.toString().replaceAll("-", "");
     }
 
-
+    /**
+     * 判断是否是windows系统
+     * @return
+     */
+    public static Boolean isWindows() {
+        return System.getProperty("os.name").toLowerCase().contains("windows");
+    }
 }
