@@ -1,4 +1,14 @@
 spring:
+  mail:
+    host: smtp.163.com
+    username: laycoding@163.com
+    password: UZIFGZOELNBWUSUQ
+    default-encoding: utf-8
+    properties:
+      mail:
+        smtp:
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
   redis:
     host: 47.96.248.205
     port: 6379
