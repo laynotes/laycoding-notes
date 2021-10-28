@@ -75,7 +75,7 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, File> implements IF
         BeanUtils.copyProperties(fileInfoVO, fileInfo);
         if (fileOne != null && fileOne.getUserId().equals(userId)) {
             QueryWrapper<FileInfo> queryInfo = new QueryWrapper<>();
-            queryWrapper.eq("file_id", fileInfoVO.getFileId());
+            queryInfo.eq("file_id", fileInfoVO.getFileId());
             fileInfoMapper.update(fileInfo, queryInfo);
             return ResultUtil.success(true);
         } else if (fileOne != null && !fileOne.getUserId().equals(userId)) {
