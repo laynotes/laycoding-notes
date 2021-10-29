@@ -1,6 +1,7 @@
 package com.laycoding.controller;
 
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.laycoding.common.utils.ResultUtil;
 import com.laycoding.dto.FileDTO;
 import com.laycoding.dto.FileInfoDTO;
@@ -52,22 +53,28 @@ public class FileController {
             @ApiImplicitParam(name = "fileInfoVO", value = "文件详情", required = true)
     })
     @ApiOperation(value = "上传文件")
-
     @RequestMapping(value = "/insertFile", method = RequestMethod.POST)
     public ResultUtil<Object> insertFile(@RequestBody FileInfoVO fileInfoVO) {
 
         return fileService.insertFile(fileInfoVO);
     }
 
+    @ApiOperation(value = "删除文件")
     @RequestMapping(value = "/deleteFile", method = RequestMethod.DELETE)
     public ResultUtil<Boolean> deleteFile(String fileId) {
 
         return fileService.deleteFile(fileId);
     }
 
-
+    @ApiOperation(value = "更新文件/归档名称")
     @RequestMapping(value = "/updateFileName", method = RequestMethod.POST)
     public ResultUtil<Boolean> updateFileName(@RequestBody FileUpdateVO fileUpdateVO) {
         return fileService.updateFileName(fileUpdateVO);
+    }
+
+
+    @RequestMapping("/listPages")
+    public ResultUtil<IPage<FileDTO>> listPages(String folderId, String val, Integer pageNum) {
+        return fileService.listPages(folderId, val, pageNum);
     }
 }

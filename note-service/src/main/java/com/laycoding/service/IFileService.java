@@ -1,5 +1,6 @@
 package com.laycoding.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.laycoding.common.utils.ResultUtil;
 import com.laycoding.dto.FileDTO;
 import com.laycoding.dto.FileInfoDTO;
@@ -57,4 +58,8 @@ public interface IFileService extends IService<File> {
      * @return
      */
     ResultUtil<Boolean> updateFileName(FileUpdateVO fileUpdateVO);
+
+
+
+    ResultUtil<IPage<FileDTO>> listPages(String folderId,String val,Integer pageNum);
 }

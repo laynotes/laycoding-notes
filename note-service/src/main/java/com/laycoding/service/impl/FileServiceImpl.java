@@ -1,6 +1,8 @@
 package com.laycoding.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.laycoding.common.enums.ErrorCodeEnum;
 import com.laycoding.common.enums.FolderReqTypeEnum;
 import com.laycoding.common.utils.OAuthUtil;
@@ -118,5 +120,13 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, File> implements IF
             return ResultUtil.success(false);
         }
         return iFolderService.updateFolderName(fileUpdateVO.getId(), fileUpdateVO.getName());
+    }
+
+    @Override
+    public ResultUtil<IPage<FileDTO>> listPages(String folderId, String val, Integer pageNum) {
+
+        Integer userId = oAuthUtil.getUserId();
+        IPage<FileDTO> pages = this.baseMapper.listPages(new Page<>(pageNum, 2), userId, folderId, val);
+        return ResultUtil.success(pages);
     }
 }

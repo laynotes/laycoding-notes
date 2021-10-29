@@ -26,17 +26,20 @@
     </select>
 
     <resultMap id="fileInfo" type="com.laycoding.dto.FileInfoDTO">
-        <id column="id" property="id" />
+        <id column="id" property="id"/>
         <result column="file_name" jdbcType="VARCHAR" property="fileName"/>
-        <result column="file_type" property="fileType" />
-        <result column="file_label" jdbcType="VARCHAR" property="fileLabel" typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler" />
-        <result column="file_config" jdbcType="VARCHAR" property="fileConfig" typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler" />
-        <result column="file_source" property="fileSource" />
-        <result column="file_content" jdbcType="VARCHAR" property="fileContent" typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler" />
+        <result column="file_type" property="fileType"/>
+        <result column="file_label" jdbcType="VARCHAR" property="fileLabel"
+                typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler"/>
+        <result column="file_config" jdbcType="VARCHAR" property="fileConfig"
+                typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler"/>
+        <result column="file_source" property="fileSource"/>
+        <result column="file_content" jdbcType="VARCHAR" property="fileContent"
+                typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler"/>
         <result column="modify_time" property="modifyTime"/>
     </resultMap>
     <select id="getFileInfoById" resultMap="fileInfo">
-        select t1.* ,t2.file_name ,t2.file_type
+        select t1.*, t2.file_name, t2.file_type
         from sys_file_info t1,
              sys_file t2
         where t1.file_id = t2.file_id
@@ -47,4 +50,27 @@
     <insert id="insertFileInfo" parameterType="com.laycoding.dto.FileInfoDTO">
 
     </insert>
+
+    <select id="listPages" resultType="com.laycoding.dto.FileDTO">
+        SELECT
+        t1.id,
+        t1.file_name,
+        t1.file_type,
+        t1.file_id,
+        t2.folder_name ,
+        t1.modify_time ,
+        t1.create_time
+        FROM
+        sys_file t1,
+        sys_folder t2
+        WHERE
+        t2.folder_id = t1.folder_id
+        AND t2.user_id = #{userId}
+        AND t1.is_delete = 0
+        and t1.folder_id = #{folderId}
+        <if test="val!=null and val !=''">
+            and LOCATE(#{val}, t1.`file_name`)>0
+        </if>
+        order by t1.create_time desc
+    </select>
 </mapper>
