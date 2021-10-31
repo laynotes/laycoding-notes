@@ -14,7 +14,7 @@ import java.util.List;
  * @author laycoding
  * @since 2021-10-15
  */
-@Mapper
+
 public interface PermissionMapper extends BaseMapper<Permission> {
     /**
      * 根据用户id获取权限

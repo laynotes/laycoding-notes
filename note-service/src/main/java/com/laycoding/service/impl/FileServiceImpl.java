@@ -47,14 +47,14 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, File> implements IF
     IFolderService iFolderService;
 
     @Override
-    public ResultUtil<List<FileDTO>> listFiles(Integer type, String folderId) {
+    public ResultUtil<List<FileDTO>> listFiles(Integer type, String folderId,String val) {
         Integer userId = oAuthUtil.getUserId();
         List<FileDTO> files = null;
         if (FolderReqTypeEnum.RECENT_FILE.getType().equals(type)) {
-            files = this.baseMapper.listFiles(userId, null);
+            files = this.baseMapper.listFiles(userId, null,val);
         }
         if (FolderReqTypeEnum.CREATE_FILE.getType().equals(type)) {
-            files = this.baseMapper.listFiles(userId, folderId);
+            files = this.baseMapper.listFiles(userId, folderId,val);
         }
         return ResultUtil.success(files);
     }
@@ -123,10 +123,10 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, File> implements IF
     }
 
     @Override
-    public ResultUtil<IPage<FileDTO>> listPages(String folderId, String val, Integer pageNum) {
+    public ResultUtil<IPage<FileDTO>> listPages(String folderId, String val, Integer pageNum,Integer pageSize) {
 
         Integer userId = oAuthUtil.getUserId();
-        IPage<FileDTO> pages = this.baseMapper.listPages(new Page<>(pageNum, 2), userId, folderId, val);
+        IPage<FileDTO> pages = this.baseMapper.listPages(new Page<>(pageNum, pageSize), userId, folderId, val);
         return ResultUtil.success(pages);
     }
 }

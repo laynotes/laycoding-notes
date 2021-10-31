@@ -19,7 +19,7 @@ import java.util.List;
  * @author laycoding
  * @since 2021-10-15
  */
-@Mapper
+
 public interface FileMapper extends BaseMapper<File> {
     /**
      * 获取文件列表
@@ -28,7 +28,7 @@ public interface FileMapper extends BaseMapper<File> {
      * @param folderId
      * @return
      */
-    List<FileDTO> listFiles(Integer uid, String folderId);
+    List<FileDTO> listFiles(Integer uid, String folderId,String val);
 
 
     /**
@@ -57,5 +57,7 @@ public interface FileMapper extends BaseMapper<File> {
      * @return
      */
     IPage<FileDTO> listPages(Page<FileDTO> page, Integer userId, String folderId, String val);
+
+
 
 }

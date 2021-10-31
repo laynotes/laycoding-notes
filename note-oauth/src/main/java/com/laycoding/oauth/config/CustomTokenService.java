@@ -18,6 +18,9 @@ import org.springframework.util.StringUtils;
 
 import java.util.LinkedHashMap;
 
+/**
+ * @author laycoding
+ */
 @Log4j2
 public class CustomTokenService extends DefaultTokenServices {
 

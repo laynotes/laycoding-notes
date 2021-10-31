@@ -12,7 +12,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @author laycoding
  * @since 2021-10-27
  */
-@Mapper
+
 public interface OssConfigMapper extends BaseMapper<OssConfig> {
 
 }

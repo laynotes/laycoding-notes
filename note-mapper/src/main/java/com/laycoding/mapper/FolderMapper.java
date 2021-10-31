@@ -16,7 +16,7 @@ import java.util.List;
  * @author laycoding
  * @since 2021-10-15
  */
-@Mapper
+
 public interface FolderMapper extends BaseMapper<Folder> {
 
     /**

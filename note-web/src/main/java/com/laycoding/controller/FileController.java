@@ -35,9 +35,9 @@ public class FileController {
 
     @ApiOperation(value = "根据文件夹id获取文件夹下的文件")
     @RequestMapping(value = "/listFiles", method = RequestMethod.GET)
-    public ResultUtil<List<FileDTO>> listFiles(Integer type, String folderId) {
+    public ResultUtil<List<FileDTO>> listFiles(Integer type, String folderId,String val) {
 
-        return fileService.listFiles(type, folderId);
+        return fileService.listFiles(type, folderId,val);
     }
 
     @ApiImplicitParams({
@@ -74,7 +74,7 @@ public class FileController {
 
 
     @RequestMapping("/listPages")
-    public ResultUtil<IPage<FileDTO>> listPages(String folderId, String val, Integer pageNum) {
-        return fileService.listPages(folderId, val, pageNum);
+    public ResultUtil<IPage<FileDTO>> listPages(String folderId, String val, Integer pageNum, Integer pageSize) {
+        return fileService.listPages(folderId, val, pageNum, pageSize);
     }
 }

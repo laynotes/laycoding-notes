@@ -12,7 +12,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @author laycoding
  * @since 2021-10-16
  */
-@Mapper
+
 public interface FileInfoMapper extends BaseMapper<FileInfo> {
 
 }

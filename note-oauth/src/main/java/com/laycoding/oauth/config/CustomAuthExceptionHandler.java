@@ -17,16 +17,16 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
+/**
+ * @author laycoding
+ */
 @Slf4j
 public class CustomAuthExceptionHandler implements AuthenticationEntryPoint, AccessDeniedHandler {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException, IOException {
-
         Throwable cause = authException.getCause();
         response.setContentType("application/json;charset=UTF-8");
         response.setStatus(HttpServletResponse.SC_OK);
-        // CORS "pre-flight" request
-
         if (cause instanceof InvalidTokenException) {
             log.error("InvalidTokenException : {}",cause.getMessage());
             //Token无效

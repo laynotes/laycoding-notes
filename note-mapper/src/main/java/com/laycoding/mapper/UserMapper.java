@@ -12,7 +12,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @author laycoding
  * @since 2021-10-15
  */
-@Mapper
+
 public interface UserMapper extends BaseMapper<User> {
 
     User getByUsername(String username);

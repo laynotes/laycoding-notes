@@ -26,7 +26,7 @@ public interface IFileService extends IService<File> {
      * @param type
      * @return
      */
-    ResultUtil<List<FileDTO>> listFiles(Integer type, String folderId);
+    ResultUtil<List<FileDTO>> listFiles(Integer type, String folderId,String val);
 
     /**
      * 获取文件详情
@@ -61,5 +61,5 @@ public interface IFileService extends IService<File> {
 
 
 
-    ResultUtil<IPage<FileDTO>> listPages(String folderId,String val,Integer pageNum);
+    ResultUtil<IPage<FileDTO>> listPages(String folderId,String val,Integer pageNum,Integer pageSize);
 }

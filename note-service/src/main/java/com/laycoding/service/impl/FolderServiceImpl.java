@@ -92,7 +92,7 @@ public class FolderServiceImpl extends ServiceImpl<FolderMapper, Folder> impleme
         queryWrapper.eq("user_id", userId);
         queryWrapper.eq("folder_id", folderId);
 
-        List<FileDTO> fileDTOS = fileMapper.listFiles(userId, folderId);
+        List<FileDTO> fileDTOS = fileMapper.listFiles(userId, folderId,null);
         if (!fileDTOS.isEmpty()) {
             return ResultUtil.success(false);
         }
